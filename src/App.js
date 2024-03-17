@@ -1,38 +1,99 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { useEffect, useState } from 'react';
 import './App.css';
+import Pagination from './component/pagination';
+import WritePage from './pages/WritePage';
 
 function App() {
-  const [title, setTitle] = useState("");
-  const [body, setBody] = useState("");
-  const [category, setCategory] = useState("");
-  const [canSave, setCanSave] = useState(false);
-
-  useEffect(() => {
-    if (
-      title === "" || title.length <= 0 || title.trim() === "" ||
-      body === "" || body.length <= 0 || body.trim() === "" ||
-      category === "" || category.length <= 0 || category.trim() === ""
-    ) {
-      setCanSave(false)
-    } else {
-      setCanSave(true)
-    }
-  }, [title, body, category])
   return (
     <div className="App">
       <div className="w-full h-full min-h-screen">
-        <header className="header bg-[#000]">
-          <div className="nav max-w-screen-xl mx-auto w-11/12 py-4 justify-between">
-            <h1 className="tw-text-center text-white text-2xl font-black font-serif">MJ's BLOG</h1>
-            <button type="button" className="searchBtn text-white">버튼있어요{canSave}</button>
+        <header className="header bg-black">
+          <div className="nav max-w-screen-xl mx-auto w-11/12 py-4 flex justify-between">
+            <h1 className="tw-text-center text-white text-2xl font-black font-serif cursor-pointer">MJ's BLOG</h1>
+            <button type="button" className="searchBtn text-white font-300 border border-white px-3 rounded-md">글쓰기</button>
           </div>
           {/* navs */}
         </header>
+
+        <div className='listSection'>
+          <ul className='listWrap w-full max-w-screen-xl mx-auto w-11/12 py-10 flex flex-col space-y-3'>
+            <li className='list border border-black py-3 px-6 cursor-pointer'>
+                <div className='flex justify-between'>
+                  <span className='listCategory text-sm'>카테고리</span>
+                  <p className='text-sm mr-3 text-zinc-500'>2024-03-17</p>
+                </div>
+                <h4 className='listTitle font-black mb-2 text-lg mt-4'>글제목</h4>
+            </li>
+            <li className='list border border-black py-3 px-6 cursor-pointer'>
+                <div className='flex justify-between'>
+                  <span className='listCategory text-sm'>카테고리</span>
+                  <p className='text-sm mr-3 text-zinc-500'>2024-03-17</p>
+                </div>
+                <h4 className='listTitle font-black mb-2 text-lg mt-4'>글제목</h4>
+            </li>
+            <li className='list border border-black py-3 px-6 cursor-pointer'>
+                <div className='flex justify-between'>
+                  <span className='listCategory text-sm'>카테고리</span>
+                  <p className='text-sm mr-3 text-zinc-500'>2024-03-17</p>
+                </div>
+                <h4 className='listTitle font-black mb-2 text-lg mt-4'>글제목</h4>
+            </li>
+            <li className='list border border-black py-3 px-6 cursor-pointer'>
+                <div className='flex justify-between'>
+                  <span className='listCategory text-sm'>카테고리</span>
+                  <p className='text-sm mr-3 text-zinc-500'>2024-03-17</p>
+                </div>
+                <h4 className='listTitle font-black mb-2 text-lg mt-4'>글제목</h4>
+            </li>
+            <li className='list border border-black py-3 px-6 cursor-pointer'>
+                <div className='flex justify-between'>
+                  <span className='listCategory text-sm'>카테고리</span>
+                  <p className='text-sm mr-3 text-zinc-500'>2024-03-17</p>
+                </div>
+                <h4 className='listTitle font-black mb-2 text-lg mt-4'>글제목</h4>
+            </li>
+            <li className='list border border-black py-3 px-6 cursor-pointer'>
+                <div className='flex justify-between'>
+                  <span className='listCategory text-sm'>카테고리</span>
+                  <p className='text-sm mr-3 text-zinc-500'>2024-03-17</p>
+                </div>
+                <h4 className='listTitle font-black mb-2 text-lg mt-4'>글제목</h4>
+            </li>
+            <li className='list border border-black py-3 px-6 cursor-pointer'>
+                <div className='flex justify-between'>
+                  <span className='listCategory text-sm'>카테고리</span>
+                  <p className='text-sm mr-3 text-zinc-500'>2024-03-17</p>
+                </div>
+                <h4 className='listTitle font-black mb-2 text-lg mt-4'>글제목</h4>
+            </li>
+            <li className='list border border-black py-3 px-6 cursor-pointer'>
+                <div className='flex justify-between'>
+                  <span className='listCategory text-sm'>카테고리</span>
+                  <p className='text-sm mr-3 text-zinc-500'>2024-03-17</p>
+                </div>
+                <h4 className='listTitle font-black mb-2 text-lg mt-4'>글제목</h4>
+            </li>
+            <li className='list border border-black py-3 px-6 cursor-pointer'>
+                <div className='flex justify-between'>
+                  <span className='listCategory text-sm'>카테고리</span>
+                  <p className='text-sm mr-3 text-zinc-500'>2024-03-17</p>
+                </div>
+                <h4 className='listTitle font-black mb-2 text-lg mt-4'>글제목</h4>
+            </li>
+            <li className='list border border-black py-3 px-6 cursor-pointer'>
+                <div className='flex justify-between'>
+                  <span className='listCategory text-sm'>카테고리</span>
+                  <p className='text-sm mr-3 text-zinc-500'>2024-03-17</p>
+                </div>
+                <h4 className='listTitle font-black mb-2 text-lg mt-4'>글제목</h4>
+            </li>
+          </ul>
+        </div>
+        {/* list */}
+
+        <Pagination/>
+        <WritePage/>
+
       </div>
-      {/* 네비게이션 컴포넌트 */}
-
-
     </div>
   );
 }
