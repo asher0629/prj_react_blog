@@ -1,9 +1,8 @@
-import { useState } from 'react';
-import ReactPaginate from 'react-paginate';
+import { useState } from "react";
+import ReactPaginate from "react-paginate";
 
-function Pagination () {
-
-    const [currentPage, setCurrentPage] = useState(0);
+function Pagination() {
+  const [currentPage, setCurrentPage] = useState(0);
 
   // 페이지 변경 핸들러
   const handlePageChange = ({ selected }) => {
@@ -19,10 +18,10 @@ function Pagination () {
         pageRangeDisplayed={3} // 보여줄 페이지 범위
         marginPagesDisplayed={1} // 마진 페이지 수
         onPageChange={handlePageChange} // 페이지 변경 핸들러
-        containerClassName={'pagination'} // 페이지네이션을 감싸는 div의 클래스 이름
-        activeClassName={'active'} // 현재 페이지의 클래스 이름
-        previousLabel = {'<'}
-        nextLabel = {'>'}
+        containerClassName={"pagination"} // 페이지네이션을 감싸는 div의 클래스 이름
+        activeClassName={"active"} // 현재 페이지의 클래스 이름
+        previousLabel={"<"}
+        nextLabel={">"}
       />
     </div>
   );
