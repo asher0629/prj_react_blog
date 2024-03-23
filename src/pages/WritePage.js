@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { API_URL } from "../config/constants";
+import { Link } from "react-router-dom";
 
 function WritePage() {
   const [title, setTitle] = useState("");
@@ -31,7 +32,6 @@ function WritePage() {
 
   const returnPage = () => {
     if (isSaving === true) {
-      
     }
   };
 
@@ -53,7 +53,7 @@ function WritePage() {
     }
   }, [title, body, category]);
   return (
-    <div className="fixed w-full h-screen top-0 bg-white pt-16">
+    <div className="w-full h-screen pt-16">
       <form className="writePage border-2 border-black rounded w-2/3 p-5 mx-auto relative">
         <div className="writeTitle indent-2">
           <label for="writeTitle" className="font-black">
@@ -105,9 +105,11 @@ function WritePage() {
           />
         </div>
         <div className="writePageBtn flex justify-end">
-          <button className="writeCancel bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
-            취소
-          </button>
+          <Link to={"/"}>
+            <button className="writeCancel bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
+              취소
+            </button>
+          </Link>
           <button
             disabled={!canSave}
             className="writeSave bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:bg-gray-500 text-sm md:text-base lg:text-xl xl:text-2xl"
