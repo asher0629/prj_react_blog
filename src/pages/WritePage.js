@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { API_URL } from "../config/constants";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function WritePage() {
   const [title, setTitle] = useState("");
@@ -9,6 +9,7 @@ function WritePage() {
   const [category, setCategory] = useState("");
   const [canSave, setCanSave] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
+  const navigate = useNavigate();
 
   const handleSave = async () => {
     setIsSaving(true);
@@ -32,6 +33,7 @@ function WritePage() {
 
   const returnPage = () => {
     if (isSaving === true) {
+      navigate("/");
     }
   };
 
@@ -53,7 +55,7 @@ function WritePage() {
     }
   }, [title, body, category]);
   return (
-    <div className="w-full h-screen pt-16">
+    <div className="w-full h-full pt-16">
       <form className="writePage border-2 border-black rounded w-2/3 p-5 mx-auto relative">
         <div className="writeTitle indent-2">
           <label for="writeTitle" className="font-black">
@@ -66,7 +68,6 @@ function WritePage() {
             placeholder="여기에 제목을 입력해 주세요."
             onChange={(ev) => {
               setTitle(ev.target.value);
-              console.log(ev.target.value);
             }}
             required
           />
@@ -100,16 +101,16 @@ function WritePage() {
             required
             onChange={(ev) => {
               setBody(ev.target.value);
-              console.log(ev.target.value);
             }}
           />
         </div>
         <div className="writePageBtn flex justify-end">
-          <Link to={"/"}>
-            <button className="writeCancel bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
-              취소
-            </button>
-          </Link>
+          <button
+            className="writeCancel bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
+            onClick={() => navigate(-1)}
+          >
+            취소
+          </button>
           <button
             disabled={!canSave}
             className="writeSave bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:bg-gray-500 text-sm md:text-base lg:text-xl xl:text-2xl"

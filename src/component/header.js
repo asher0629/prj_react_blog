@@ -4,9 +4,11 @@ function Header() {
   return (
     <header className="header bg-black">
       <div className="nav max-w-screen-xl mx-auto w-11/12 py-4 flex justify-between">
-        <h1 className="tw-text-center text-white text-2xl font-black font-serif cursor-pointer">
-          MJ's BLOG
-        </h1>
+        <Link to={"/"}>
+          <h1 className="tw-text-center text-white text-2xl font-black font-serif cursor-pointer">
+            MJ's BLOG
+          </h1>
+        </Link>
         <Link to="/writePage">
           <button
             type="button"
