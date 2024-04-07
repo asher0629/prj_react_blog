@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
 import axios, { Axios, AxiosHeaders } from "axios";
 import { API_URL } from "../config/constants";
+import { useNavigate } from "react-router";
 
 function Homepage() {
   const [postArr, setPostArr] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
   const getPostData = async () => {
     setIsLoading(true);
@@ -39,6 +41,9 @@ function Homepage() {
                   <li
                     key={post._id}
                     className="list border border-black py-3 px-6 cursor-pointer"
+                    onClick={() => {
+                      navigate("/contentPage/" + post._id);
+                    }}
                   >
                     <div className="flex justify-between">
                       <span className="listCategory text-sm">
@@ -58,12 +63,6 @@ function Homepage() {
           </ul>
         </div>
         {/* list */}
-
-        <div className="contentPage">
-          <div className="w-2/3 p-20 border border-black m-auto">
-            {/* <h4>{postArr[0].title}</h4> */}
-          </div>
-        </div>
       </div>
     </div>
   );

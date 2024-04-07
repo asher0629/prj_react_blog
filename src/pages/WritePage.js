@@ -12,8 +12,9 @@ function WritePage() {
   const navigate = useNavigate();
 
   const handleSave = async () => {
+    console.log("handle save");
+    if (!canSave) return;
     setIsSaving(true);
-
     try {
       const data = {
         title: title,
@@ -23,17 +24,15 @@ function WritePage() {
 
       const res = await axios.post(`${API_URL}/post`, data);
 
+      if (res) {
+        console.log("has res");
+        navigate("/");
+      }
       console.log(res);
     } catch (error) {
       console.log(error);
     } finally {
       setIsSaving(false);
-    }
-  };
-
-  const returnPage = () => {
-    if (isSaving === true) {
-      navigate("/");
     }
   };
 
@@ -54,11 +53,12 @@ function WritePage() {
       setCanSave(true);
     }
   }, [title, body, category]);
+
   return (
     <div className="w-full h-full pt-16">
       <form className="writePage border-2 border-black rounded w-2/3 p-5 mx-auto relative">
         <div className="writeTitle indent-2">
-          <label for="writeTitle" className="font-black">
+          <label htmlFor="writeTitle" className="font-black">
             글제목
           </label>
           <input
@@ -78,7 +78,6 @@ function WritePage() {
             className="writeCategory border py-1 px-3"
             onChange={(ev) => {
               setCategory(ev.target.value);
-              console.log(ev.target.value);
             }}
           >
             <option value="">분류를 선택하세요</option>
@@ -90,7 +89,7 @@ function WritePage() {
           </select>
         </div>
         <div className="writeContent indent-2">
-          <label for="writeContent" className="font-black">
+          <label htmlFor="writeContent" className="font-black">
             글내용
           </label>
           <textarea
@@ -111,13 +110,17 @@ function WritePage() {
           >
             취소
           </button>
-          <button
+          <div
             disabled={!canSave}
-            className="writeSave bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:bg-gray-500 text-sm md:text-base lg:text-xl xl:text-2xl"
+            className={`writeSave font-bold py-2 px-4 rounded text-white ${
+              !canSave
+                ? "bg-gray-500 text-sm md:text-base "
+                : "bg-blue-500 lg:text-xl"
+            }`}
             onClick={handleSave}
           >
             저장
-          </button>
+          </div>
         </div>
       </form>
     </div>
