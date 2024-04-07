@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import axios, { Axios, AxiosHeaders } from "axios";
 import { API_URL } from "../config/constants";
 import { useNavigate } from "react-router";
+import { Link } from "react-router-dom";
+import { formatTime } from "../utils/stringUtils";
 
 function Homepage() {
   const [postArr, setPostArr] = useState([]);
@@ -50,7 +52,7 @@ function Homepage() {
                         {post.category}
                       </span>
                       <p className="text-sm mr-3 text-zinc-500">
-                        {post.createdAt}
+                        {formatTime(post.createdAt)}
                       </p>
                     </div>
                     <h4 className="listTitle font-black mb-2 text-lg mt-4">
