@@ -3,6 +3,8 @@ import ReactPaginate from "react-paginate";
 
 function Pagination() {
   const [currentPage, setCurrentPage] = useState(0);
+  const [totalPage, setTotalPage] = useState(0);
+  const itemsperPage = 10;
 
   // 페이지 변경 핸들러
   const handlePageChange = ({ selected }) => {

@@ -12,7 +12,6 @@ function WritePage() {
   const navigate = useNavigate();
 
   const handleSave = async () => {
-    console.log("handle save");
     if (!canSave) return;
     setIsSaving(true);
     try {
@@ -104,12 +103,12 @@ function WritePage() {
           />
         </div>
         <div className="writePageBtn flex justify-end">
-          <button
+          <div
             className="writeCancel bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
             onClick={() => navigate(-1)}
           >
             취소
-          </button>
+          </div>
           <div
             disabled={!canSave}
             className={`writeSave font-bold py-2 px-4 rounded text-white ${

@@ -7,6 +7,7 @@ import { formatTime } from "../utils/stringUtils";
 export default function ContentPage() {
   const [post, setPost] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [comment, setComment] = useState("");
   const { listId } = useParams();
 
   const [deletPost, setDeletePost] = useState(false);
@@ -36,6 +37,42 @@ export default function ContentPage() {
     }
   };
 
+  const postComment = async () => {
+    try {
+      const data = {
+        postId: listId,
+        body: comment,
+      };
+
+      const res = await axios.post(`${API_URL}/post/create-comment`, data);
+
+      if (res) {
+        getPostData();
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setDeletePost(false);
+    }
+  };
+
+  const deleteComment = async (commentId) => {
+    try {
+      const data = {
+        postId: listId,
+        commentId: commentId,
+      };
+      const res = await axios.post(`${API_URL}/post/delete-comment`, data);
+      if (res) {
+        getPostData();
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setDeletePost(false);
+    }
+  };
+
   useEffect(() => {
     getPostData();
   }, []);
@@ -57,7 +94,50 @@ export default function ContentPage() {
                 <p>수정일 {formatTime(post.updatedAt)}</p>
               </div>
             </div>
-            <p className="border my-8 p-5 h-96 whitespace-pre">{post.body}</p>
+            <p className="border mt-8 mb-4 p-5 h-96 whitespace-pre">
+              {post.body}
+            </p>
+            <div className="mb-4 w-full flex flex-row items-center">
+              <input
+                type="text"
+                className="p-4 mx-auto w-4/5 outline-none border-2 border-black rounded-lg"
+                onChange={(ev) => setComment(ev.target.value)}
+              />
+              <button
+                disabled={
+                  comment === "" || comment.length < 0 || comment.trim() === ""
+                }
+                className="py-4 w-24 bg-transparent border-2 border-black rounded-lg disabled:border-gray-500 disabled:bg-gray-500 disabled:text-white transition duration-300 ease-in-out hover:bg-black hover:text-white"
+                onClick={() => postComment()}
+              >
+                댓글 달기
+              </button>
+            </div>
+            <div className="w-full flex flex-col items-center">
+              {post.comments && post.comments.length > 0 ? (
+                post.comments.map((comment) => (
+                  <div
+                    className="p-2 my-2 mx-auto w-11/12 flex justify-between rounded-lg bg-slate-200 "
+                    key={comment.id}
+                  >
+                    <p>{comment.body}</p>
+                    <p>
+                      {formatTime(comment.createdAt)}
+                      <span
+                        className="ml-5 cursor-pointer"
+                        onClick={() => {
+                          deleteComment(comment.id);
+                        }}
+                      >
+                        ❌
+                      </span>
+                    </p>
+                  </div>
+                ))
+              ) : (
+                <></>
+              )}
+            </div>
             <div className="flex space-x-2 font-bold justify-between">
               <button
                 className="border px-4 py-1 bg-gray-200	text-gray-800"
@@ -71,7 +151,7 @@ export default function ContentPage() {
                 <button
                   className="border px-4 py-1 bg-gray-200	text-gray-800"
                   onClick={() => {
-                    navigate(`/contentPage/edit/${listId}`);
+                    navigate(`/content/edit/${listId}`);
                   }}
                 >
                   수정

@@ -20,6 +20,9 @@ export default function EditPage() {
     try {
       const res = await axios.get(`${API_URL}/post/${listId}`);
       setPost(res.data);
+      setTitle(res.data.title);
+      setCategory(res.data.category);
+      setBody(res.data.body);
     } catch (error) {
       console.log(error);
     } finally {
@@ -85,7 +88,7 @@ export default function EditPage() {
             type="text"
             id="editTitle"
             className="border w-full mt-5 h-10 p-2.5 text-sm text-gray-900"
-            defaultValue={post.title}
+            value={title}
             onChange={(ev) => {
               setTitle(ev.target.value);
             }}
@@ -96,7 +99,7 @@ export default function EditPage() {
           <select
             name="editCategory"
             className="editCategory border py-1 px-3"
-            defaultValue={post.category}
+            value={category}
             key={post.category}
             onChange={(ev) => {
               setCategory(ev.target.value);
@@ -119,7 +122,7 @@ export default function EditPage() {
             rows="10"
             className="border w-full mt-5 p-2.5 text-sm text-gray-900"
             required
-            defaultValue={post.body}
+            value={body}
             onChange={(ev) => {
               setBody(ev.target.value);
             }}
